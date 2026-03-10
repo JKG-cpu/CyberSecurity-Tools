@@ -1,3 +1,0 @@
-npx create-react-app <name>
-
-npm start
