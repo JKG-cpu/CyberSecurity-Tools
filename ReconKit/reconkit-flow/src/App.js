@@ -71,7 +71,7 @@ const weeks = [
     week: 1, title: "Port Scanner", color: "#3b82f6",
     tasks: [
       { text: "Set up Codespaces repo & folder structure", file: null },
-      { text: "Write scanner.py using Python's socket library", file: "scanner.py" },
+      { text: "Write scanner.py using Python's asyncio library", file: "scanner.py" },
       { text: "Manually scan localhost ports 20–1024", file: null },
       { text: "Install nmap and call it via subprocess", file: "scanner.py" },
       { text: "Write open port results to results.json", file: "results.json" },
