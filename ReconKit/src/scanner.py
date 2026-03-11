@@ -23,6 +23,3 @@ class Scanner:
         tasks = [self._scan_port(port, semaphore) 
                  for port in range(self.start_port, self.end_port + 1)]
         await asyncio.gather(*tasks)
-
-# Run it:
-# asyncio.run(Scanner("example.com").start_scan())
