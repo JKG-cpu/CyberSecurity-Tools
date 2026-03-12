@@ -4,6 +4,7 @@ from socket import gethostbyname
 from datetime import datetime
 
 from .helpers import FileHandler
+from .whois_lookup import WhoisLookup
 
 class Scanner:
     def __init__(self, remote_host: str, start_port: int = 1, end_port: int = 1024) -> None:
@@ -37,6 +38,7 @@ class NmapScanner:
         self.scanner = Scanner(self.target_ip, start_port, end_port)
 
         self.filehandler = FileHandler()
+        self.whioslookup = WhoisLookup()
 
     def get_time(self) -> str:
         return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -49,7 +51,7 @@ class NmapScanner:
                 "open_ports": open_ports,
                 "nmap_output": nmap_result
             },
-            "whois": {},
+            "whois": self.whioslookup.lookup(self.target_ip),
             "dns": {}
         }
 
