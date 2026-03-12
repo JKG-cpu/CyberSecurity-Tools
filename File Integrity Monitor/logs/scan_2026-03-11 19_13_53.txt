@@ -1,0 +1,24 @@
+SCAN REPORT - 2026-03-11 19:13:53
+========================================
+
+[MODIFIED] — 0 file(s)
+
+[ADDED] — 2 file(s)
+  - C:/Users/FamilyPC/Desktop/Test Folder\file.txt
+  - C:/Users/FamilyPC/Desktop/Test Folder\main.txt
+
+[DELETED] — 11 file(s)
+  - C:/Users/FamilyPC/Desktop/Test Folder\random_file1.txt
+  - C:/Users/FamilyPC/Desktop/Test Folder\random_folder1\file_23934
+  - C:/Users/FamilyPC/Desktop/Test Folder\random_folder1\file_27656
+  - C:/Users/FamilyPC/Desktop/Test Folder\random_folder1\file_29034
+  - C:/Users/FamilyPC/Desktop/Test Folder\random_folder1\file_27668
+  - C:/Users/FamilyPC/Desktop/Test Folder\random_folder1\file_20324
+  - C:/Users/FamilyPC/Desktop/Test Folder\random_folder1\file_23162
+  - C:/Users/FamilyPC/Desktop/Test Folder\random_folder1\file_22643
+  - C:/Users/FamilyPC/Desktop/Test Folder\random_folder1\file_11773
+  - C:/Users/FamilyPC/Desktop/Test Folder\random_folder1\file_9054
+  - C:/Users/FamilyPC/Desktop/Test Folder\random_folder1\file_17491
+
+
+

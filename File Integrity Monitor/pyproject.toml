@@ -1,0 +1,9 @@
+[project]
+name = "file-integrity-monitor"
+version = "0.1.0"
+description = "Walk through files -> hash + compare them if they were modified."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "rich>=14.3.3",
+]
