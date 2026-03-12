@@ -1,3 +1,3 @@
 from src import *
 
-asyncio.run(Scanner("localhost", 9990, 10000).start_scan())
+NmapScanner("localhost").run_nmap_scan()

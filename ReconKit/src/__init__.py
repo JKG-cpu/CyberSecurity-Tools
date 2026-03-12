@@ -1,1 +1,1 @@
-from .scanner import Scanner, asyncio
+from .scanner import NmapScanner, Scanner, asyncio
