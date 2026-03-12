@@ -1,3 +1,3 @@
 from src import *
 
-NmapScanner("localhost").run_nmap_scan()
+NmapScanner("localhost", 9990, 10000).start_scan()

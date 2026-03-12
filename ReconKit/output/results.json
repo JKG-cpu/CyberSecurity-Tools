@@ -1,0 +1,26 @@
+[
+    {
+        "target": "127.0.0.1",
+        "scan_time": "2026-03-12 16:23:35",
+        "ports": {
+            "open_ports": [
+                9999
+            ],
+            "nmap_output": "Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-03-12 16:23 UTC\nService detection performed. Please report any incorrect results at https://nmap.org/submit/ .\nNmap done: 1 IP address (1 host up) scanned in 0.27 seconds\n"
+        },
+        "whois": {},
+        "dns": {}
+    },
+    {
+        "target": "127.0.0.1",
+        "scan_time": "2026-03-12 16:24:18",
+        "ports": {
+            "open_ports": [
+                9999
+            ],
+            "nmap_output": "Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-03-12 16:24 UTC\nService detection performed. Please report any incorrect results at https://nmap.org/submit/ .\nNmap done: 1 IP address (1 host up) scanned in 0.29 seconds\n"
+        },
+        "whois": {},
+        "dns": {}
+    }
+]
