@@ -1,0 +1,6 @@
+{
+    "remote_host": "google.com",
+    "start_port": 1,
+    "end_port": 100,
+    "max_concurrent": 500
+}

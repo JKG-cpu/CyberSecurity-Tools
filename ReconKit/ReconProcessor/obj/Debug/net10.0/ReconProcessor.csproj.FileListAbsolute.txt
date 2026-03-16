@@ -1,0 +1,15 @@
+/workspaces/CyberSecurity-Tools/ReconKit/ReconProcessor/bin/Debug/net10.0/ReconProcessor
+/workspaces/CyberSecurity-Tools/ReconKit/ReconProcessor/bin/Debug/net10.0/ReconProcessor.deps.json
+/workspaces/CyberSecurity-Tools/ReconKit/ReconProcessor/bin/Debug/net10.0/ReconProcessor.runtimeconfig.json
+/workspaces/CyberSecurity-Tools/ReconKit/ReconProcessor/bin/Debug/net10.0/ReconProcessor.dll
+/workspaces/CyberSecurity-Tools/ReconKit/ReconProcessor/bin/Debug/net10.0/ReconProcessor.pdb
+/workspaces/CyberSecurity-Tools/ReconKit/ReconProcessor/obj/Debug/net10.0/ReconProcessor.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/CyberSecurity-Tools/ReconKit/ReconProcessor/obj/Debug/net10.0/ReconProcessor.AssemblyInfoInputs.cache
+/workspaces/CyberSecurity-Tools/ReconKit/ReconProcessor/obj/Debug/net10.0/ReconProcessor.AssemblyInfo.cs
+/workspaces/CyberSecurity-Tools/ReconKit/ReconProcessor/obj/Debug/net10.0/ReconProcessor.csproj.CoreCompileInputs.cache
+/workspaces/CyberSecurity-Tools/ReconKit/ReconProcessor/obj/Debug/net10.0/ReconProcessor.sourcelink.json
+/workspaces/CyberSecurity-Tools/ReconKit/ReconProcessor/obj/Debug/net10.0/ReconProcessor.dll
+/workspaces/CyberSecurity-Tools/ReconKit/ReconProcessor/obj/Debug/net10.0/refint/ReconProcessor.dll
+/workspaces/CyberSecurity-Tools/ReconKit/ReconProcessor/obj/Debug/net10.0/ReconProcessor.pdb
+/workspaces/CyberSecurity-Tools/ReconKit/ReconProcessor/obj/Debug/net10.0/ReconProcessor.genruntimeconfig.cache
+/workspaces/CyberSecurity-Tools/ReconKit/ReconProcessor/obj/Debug/net10.0/ref/ReconProcessor.dll
