@@ -4,7 +4,7 @@ from socket import gethostbyname
 from datetime import datetime
 
 from .helpers import FileHandler
-from .whois_lookup import WhoisLookup
+from .lookups import WhoisLookup, DNSLookup
 
 class Scanner:
     def __init__(self, remote_host: str, start_port: int = 1, end_port: int = 1024) -> None:
@@ -18,7 +18,6 @@ class Scanner:
                     asyncio.open_connection(self.target_ip, port),
                     timeout=1
                 )
-                print(f"Port {port} is open")
                 writer.close()
                 await writer.wait_closed()
                 return port
@@ -33,12 +32,15 @@ class Scanner:
         return [port for port in ports if port is not None]
 
 class NmapScanner:
-    def __init__(self, remote_host: str, start_port: int = 1, end_port: int = 1024):
+    def __init__(self, remote_host: str, start_port: int = 1, end_port: int = 1024, max_concurrent: int = 500):
+        self.host = remote_host
         self.target_ip = gethostbyname(remote_host)
+        self.max_concurrent = max_concurrent
         self.scanner = Scanner(self.target_ip, start_port, end_port)
 
         self.filehandler = FileHandler()
         self.whioslookup = WhoisLookup()
+        self.dnslookup = DNSLookup()
 
     def get_time(self) -> str:
         return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -52,20 +54,31 @@ class NmapScanner:
                 "nmap_output": nmap_result
             },
             "whois": self.whioslookup.lookup(self.target_ip),
-            "dns": {}
+            "dns": self.dnslookup.lookup(self.host)
         }
 
     def _run_nmap_scan(self) -> tuple[str, list[int]]:
-        open_ports = asyncio.run(self.scanner.start_scan())
+        open_ports = asyncio.run(self.scanner.start_scan(self.max_concurrent))
 
         if not open_ports:
             return ("All ports are closed or filtered.", open_ports)
 
         port_string = ",".join(str(p) for p in open_ports)
         result = subprocess.run(
-            ["nmap", "-sV", "-T4", "--open", "-p", port_string, self.target_ip],
-            capture_output = True,
-            text = True
+            [
+                "nmap",
+                "-sV",
+                "--version-intensity", "2",
+                "-T4",
+                "--open",
+                "-p", port_string,
+                "--host-timeout", "30s",
+                "--script-timeout", "10s",
+                self.target_ip
+            ],
+            capture_output=True,
+            text=True,
+            timeout=60
         )
         return (result.stdout, open_ports)
 
@@ -75,3 +88,4 @@ class NmapScanner:
         data = self.get_details(nmap_result, open_ports)
 
         self.filehandler.save_data(data)
+
