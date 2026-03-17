@@ -2,6 +2,7 @@ import asyncio
 import subprocess
 from socket import gethostbyname
 from datetime import datetime
+from os.path import join
 
 from .helpers import FileHandler
 from .lookups import WhoisLookup, DNSLookup
@@ -87,5 +88,5 @@ class NmapScanner:
 
         data = self.get_details(nmap_result, open_ports)
 
-        self.filehandler.save_data(data)
+        self.filehandler.save(join("output", "results.json"), data)
 

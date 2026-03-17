@@ -1,11 +1,11 @@
 {
-    "target": "142.250.69.174",
-    "scan_time": "2026-03-16 17:53:42",
+    "target": "142.250.73.110",
+    "scan_time": "2026-03-17 20:07:19",
     "ports": {
         "open_ports": [
             80
         ],
-        "nmap_output": "Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-03-16 17:53 UTC\nStats: 0:00:00 elapsed; 0 hosts completed (0 up), 1 undergoing Ping Scan\nPing Scan Timing: About 100.00% done; ETC: 17:53 (0:00:00 remaining)\nNmap scan report for pnseaa-ap-in-f14.1e100.net (142.250.69.174)\nHost is up (0.0044s latency).\n\nPORT   STATE SERVICE VERSION\n80/tcp open  http?\n1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :\nSF-Port80-TCP:V=7.94SVN%I=2%D=3/16%Time=69B8439B%P=x86_64-pc-linux-gnu%r(G\nSF:etRequest,15E0,\"HTTP/1\\.0\\x20200\\x20OK\\r\\nDate:\\x20Mon,\\x2016\\x20Mar\\x2\nSF:02026\\x2017:53:31\\x20GMT\\r\\nExpires:\\x20-1\\r\\nCache-Control:\\x20private\nSF:,\\x20max-age=0\\r\\nContent-Type:\\x20text/html;\\x20charset=ISO-8859-1\\r\\n\nSF:Content-Security-Policy-Report-Only:\\x20object-src\\x20'none';base-uri\\x\nSF:20'self';script-src\\x20'nonce-4Y8VtlM0q24tglgXr3LmZw'\\x20'strict-dynami\nSF:c'\\x20'report-sample'\\x20'unsafe-eval'\\x20'unsafe-inline'\\x20https:\\x20\nSF:http:;report-uri\\x20https://csp\\.withgoogle\\.com/csp/gws/other-hp\\r\\nRe\nSF:porting-Endpoints:\\x20default=\\\"//www\\.google\\.com/httpservice/retry/js\nSF:error\\?ei=m0O4aZvZJrmh0PEP7aS9wAk&cad=crash&error=Page%20Crash&jsel=1&b\nSF:ver=2397&dpf=MTczUUcugzKl_d9Nr_G2uj-78XDH8YNXsYjx3NP1XUk\\\"\\r\\nP3P:\\x20C\nSF:P=\\\"This\\x20is\\x20not\\x20a\\x20P3P\\x20policy!\\x20See\\x20g\\.co/p3phelp\\x2\nSF:0for\\x20more\\x20info\\.\\\"\\r\\nServer:\\x20gws\\r\\nX-XSS-Protection:\\x200\\r\\\nSF:nX-Frame-Options:\\x20SAMEORIGIN\\r\\nSet-Cookie:\\x20__Secure-STRP=AEEP7gJ\nSF:igMIhrVlYKRh3p2oDB1--PP8HShozTECFzYUIHLkuCM5zVs2rNf0v04styWke9MAI05FhM5\nSF:kNTsF0R5oCtA9z6KUhi4XU;\\x20expires=Mon,\\x2016-Mar-2026\\x2017:58:31\\x20G\nSF:MT;\\x20path=/;\\x20domai\")%r(HTTPOptions,6DC,\"HTTP/1\\.0\\x20405\\x20Method\nSF:\\x20Not\\x20Allowed\\r\\nContent-Type:\\x20text/html;\\x20charset=UTF-8\\r\\nR\nSF:eferrer-Policy:\\x20no-referrer\\r\\nContent-Length:\\x201592\\r\\nDate:\\x20M\nSF:on,\\x2016\\x20Mar\\x202026\\x2017:53:31\\x20GMT\\r\\n\\r\\n<!DOCTYPE\\x20html>\\n\nSF:<html\\x20lang=en>\\n\\x20\\x20<meta\\x20charset=utf-8>\\n\\x20\\x20<meta\\x20na\nSF:me=viewport\\x20content=\\\"initial-scale=1,\\x20minimum-scale=1,\\x20width=\nSF:device-width\\\">\\n\\x20\\x20<title>Error\\x20405\\x20\\(Method\\x20Not\\x20Allo\nSF:wed\\)!!1</title>\\n\\x20\\x20<style>\\n\\x20\\x20\\x20\\x20\\*{margin:0;padding:\nSF:0}html,code{font:15px/22px\\x20arial,sans-serif}html{background:#fff;col\nSF:or:#222;padding:15px}body{margin:7%\\x20auto\\x200;max-width:390px;min-he\nSF:ight:180px;padding:30px\\x200\\x2015px}\\*\\x20>\\x20body{background:url\\(//\nSF:www\\.google\\.com/images/errors/robot\\.png\\)\\x20100%\\x205px\\x20no-repeat\nSF:;padding-right:205px}p{margin:11px\\x200\\x2022px;overflow:hidden}ins{col\nSF:or:#777;text-decoration:none}a\\x20img{border:0}@media\\x20screen\\x20and\\\nSF:x20\\(max-width:772px\\){body{background:none;margin-top:0;max-width:none\nSF:;padding-right:0}}#logo{background:url\\(//www\\.google\\.com/images/brand\nSF:ing\");\n\nService detection performed. Please report any incorrect results at https://nmap.org/submit/ .\nNmap done: 1 IP address (1 host up) scanned in 16.88 seconds\n"
+        "nmap_output": "Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-03-17 20:07 UTC\nNmap scan report for pnseaa-an-in-f14.1e100.net (142.250.73.110)\nHost is up (0.0049s latency).\n\nPORT   STATE SERVICE VERSION\n80/tcp open  http?\n1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :\nSF-Port80-TCP:V=7.94SVN%I=2%D=3/17%Time=69B9B46C%P=x86_64-pc-linux-gnu%r(G\nSF:etRequest,36B0,\"HTTP/1\\.0\\x20200\\x20OK\\r\\nDate:\\x20Tue,\\x2017\\x20Mar\\x2\nSF:02026\\x2020:07:08\\x20GMT\\r\\nExpires:\\x20-1\\r\\nCache-Control:\\x20private\nSF:,\\x20max-age=0\\r\\nContent-Type:\\x20text/html;\\x20charset=ISO-8859-1\\r\\n\nSF:Content-Security-Policy-Report-Only:\\x20object-src\\x20'none';base-uri\\x\nSF:20'self';script-src\\x20'nonce-SWDGl2QaxZXtZbbhYR3WOg'\\x20'strict-dynami\nSF:c'\\x20'report-sample'\\x20'unsafe-eval'\\x20'unsafe-inline'\\x20https:\\x20\nSF:http:;report-uri\\x20https://csp\\.withgoogle\\.com/csp/gws/other-hp\\r\\nRe\nSF:porting-Endpoints:\\x20default=\\\"//www\\.google\\.com/httpservice/retry/js\nSF:error\\?ei=bLS5aZ7RNaDb0PEPpaz1qAU&cad=crash&error=Page%20Crash&jsel=1&b\nSF:ver=2397&dpf=6sJf6m4euVIXgwNj2-udW-0MRH5Ws1Xcgj1C4IeCMnk\\\"\\r\\nP3P:\\x20C\nSF:P=\\\"This\\x20is\\x20not\\x20a\\x20P3P\\x20policy!\\x20See\\x20g\\.co/p3phelp\\x2\nSF:0for\\x20more\\x20info\\.\\\"\\r\\nServer:\\x20gws\\r\\nX-XSS-Protection:\\x200\\r\\\nSF:nX-Frame-Options:\\x20SAMEORIGIN\\r\\nSet-Cookie:\\x20__Secure-STRP=AEEP7gJ\nSF:3DxEItlnmknUR1lR0xjpfjD0K1NRBt1RTFIobwUHeOU0dPi-3-L8o9Mbq2jdogvcMU_osuS\nSF:osdI_5qb2d1nDuHCsefm-M;\\x20expires=Tue,\\x2017-Mar-2026\\x2020:12:08\\x20G\nSF:MT;\\x20path=/;\\x20domai\")%r(HTTPOptions,6DC,\"HTTP/1\\.0\\x20405\\x20Method\nSF:\\x20Not\\x20Allowed\\r\\nContent-Type:\\x20text/html;\\x20charset=UTF-8\\r\\nR\nSF:eferrer-Policy:\\x20no-referrer\\r\\nContent-Length:\\x201592\\r\\nDate:\\x20T\nSF:ue,\\x2017\\x20Mar\\x202026\\x2020:07:09\\x20GMT\\r\\n\\r\\n<!DOCTYPE\\x20html>\\n\nSF:<html\\x20lang=en>\\n\\x20\\x20<meta\\x20charset=utf-8>\\n\\x20\\x20<meta\\x20na\nSF:me=viewport\\x20content=\\\"initial-scale=1,\\x20minimum-scale=1,\\x20width=\nSF:device-width\\\">\\n\\x20\\x20<title>Error\\x20405\\x20\\(Method\\x20Not\\x20Allo\nSF:wed\\)!!1</title>\\n\\x20\\x20<style>\\n\\x20\\x20\\x20\\x20\\*{margin:0;padding:\nSF:0}html,code{font:15px/22px\\x20arial,sans-serif}html{background:#fff;col\nSF:or:#222;padding:15px}body{margin:7%\\x20auto\\x200;max-width:390px;min-he\nSF:ight:180px;padding:30px\\x200\\x2015px}\\*\\x20>\\x20body{background:url\\(//\nSF:www\\.google\\.com/images/errors/robot\\.png\\)\\x20100%\\x205px\\x20no-repeat\nSF:;padding-right:205px}p{margin:11px\\x200\\x2022px;overflow:hidden}ins{col\nSF:or:#777;text-decoration:none}a\\x20img{border:0}@media\\x20screen\\x20and\\\nSF:x20\\(max-width:772px\\){body{background:none;margin-top:0;max-width:none\nSF:;padding-right:0}}#logo{background:url\\(//www\\.google\\.com/images/brand\nSF:ing\");\n\nService detection performed. Please report any incorrect results at https://nmap.org/submit/ .\nNmap done: 1 IP address (1 host up) scanned in 17.01 seconds\n"
     },
     "whois": {
         "domain_name": "1E100.NET",
@@ -48,25 +48,13 @@
     },
     "dns": {
         "A": [
-            "142.250.69.174"
+            "Error: The DNS query name does not exist: 142.250.73.110."
         ],
         "MX": [
-            "10 smtp.google.com."
+            "Error: The DNS query name does not exist: 142.250.73.110."
         ],
         "TXT": [
-            "\"MS=E4A68B9AB2BB9670BCE15412F62916164C0B20BB\"",
-            "\"docusign=05958488-4752-4ef2-95eb-aa7ba8a3bd0e\"",
-            "\"v=spf1 include:_spf.google.com ~all\"",
-            "\"docusign=1b0a6754-49b1-4db5-8540-d2c12664b289\"",
-            "\"google-site-verification=wD8N7i1JTNTkezJ49swvWW48f8_9xveREV4oB-0Hf5o\"",
-            "\"onetrust-domain-verification=6d685f1d41a94696ad7ef771f68993e0\"",
-            "\"apple-domain-verification=30afIBcvSuDV2PLX\"",
-            "\"google-site-verification=4ibFUgB-wXLQ_S7vsXVomSTVamuOXBiVAzpR5IZ87D0\"",
-            "\"globalsign-smime-dv=CDYX+XFHUw2wml6/Gb8+59BsH31KzUr6c1l2BPvqKX8=\"",
-            "\"onetrust-domain-verification=0d477fe608074e6f9c12bca7826035cc\"",
-            "\"cisco-ci-domain-verification=47c38bc8c4b74b7233e9053220c1bbe76bcc1cd33c7acf7acd36cd6a5332004b\"",
-            "\"facebook-domain-verification=22rm551cu4k0ab0bxsw536tlds4h95\"",
-            "\"google-site-verification=TV9-DBe4R80X4v0M4U_bd_J9cpOJM0nikft0jAgjmsQ\""
+            "Error: The DNS query name does not exist: 142.250.73.110."
         ]
     }
 }
