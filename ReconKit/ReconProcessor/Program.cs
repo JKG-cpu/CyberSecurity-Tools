@@ -27,7 +27,7 @@ public class ConfigLoader
         // Host
         if (configSettings.remoteHost == string.Empty)
         {
-            Console.WriteLine("Remote host is empty.");
+            Console.WriteLine($"Remote host is empty. {configSettings.remoteHost}");
             return false;
         }
 
@@ -62,8 +62,10 @@ public class ConfigLoader
         {
             string config = File.ReadAllText(FilePath);
             model = JsonSerializer.Deserialize<ConfigSettings>(config)!;
+            Console.WriteLine(model);
+            return model;
         }
-        catch
+        catch (FileNotFoundException)
         {
             Console.WriteLine($"Could not load data from {FilePath}");
         }
@@ -89,8 +91,8 @@ public class Program
         }
         else if (args[0] == "--report")
         {
-            // Report
-            Console.WriteLine("Report has not been added yet.");
+            ReportGenerator reportGenerator = new();
+            reportGenerator.HTMLReportGenerator();
         }
         else
         {
