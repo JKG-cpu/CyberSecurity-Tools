@@ -1,100 +1,112 @@
 import hashlib
 import os
 import json
+import argparse
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from rich import print as rprint
 from rich.panel import Panel
+from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn, TimeElapsedColumn
 from os.path import join
 from datetime import datetime
 
-def hash_text(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
-
 class FileIntegrityMonitor:
     def __init__(self):
-        self.data_fp = join("data", "data.json")
-        self.changes_fp = join("data", "changes.json")
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+        self.data_fp = join(BASE_DIR, "data", "data.json")
+        self.changes_fp = join(BASE_DIR, "data", "changes.json")
+        self.logs_dir = join(BASE_DIR, "logs")
+
+        os.makedirs(join(BASE_DIR, "data"), exist_ok=True)
 
         self.data = self.load_data()
         self.changes = self.load_changes()
 
-    # Data Saving + Loading
-    #region
+    # ── Data Saving + Loading ─────────────────────────────────────────────────
     def save_data(self, data: dict) -> None:
         try:
             with open(self.data_fp, "w") as f:
-                json.dump(data, f, indent = 4)
-        
+                json.dump(data, f, indent=4)
+
         except Exception as e:
-            print(f"Error saving data in {self.data_fp}: {e}")
+            rprint(f"[red]Error saving data in {self.data_fp}: {e}[/red]")
 
     def load_data(self) -> dict:
-        data = {}
-
         try:
             with open(self.data_fp, "r") as f:
-                data = json.load(f)
+                return json.load(f)
 
-        except FileNotFoundError as f:
-            print(f"File not found error, can't load data: {f}.")
-        
+        except FileNotFoundError:
+            return {}
+
         except json.JSONDecodeError as e:
-            print(f"Couldn't decode file, error: {e}")
-        
-        return data
+            rprint(f"[red]Couldn't decode data file: {e}[/red]")
+            return {}
 
     def save_changes(self, data: dict) -> None:
         try:
             with open(self.changes_fp, "w") as f:
-                json.dump(data, f, indent = 4)
-        
+                json.dump(data, f, indent=4)
+
         except Exception as e:
-            print(f"Error saving data in {self.changes_fp}: {e}")
+            rprint(f"[red]Error saving changes in {self.changes_fp}: {e}[/red]")
 
     def load_changes(self) -> dict:
-        changes = {}
-
         try:
             with open(self.changes_fp, "r") as f:
-                changes = json.load(f)
+                return json.load(f)
 
-        except FileNotFoundError as f:
-            print(f"File not found error, can't load data: {f}.")
-        
+        except FileNotFoundError:
+            return {}
+
         except json.JSONDecodeError as e:
-            print(f"Couldn't decode file, error: {e}")
-        
-        return changes
-    #endregion
+            rprint(f"[red]Couldn't decode changes file: {e}[/red]")
+            return {}
 
-    # Files / Folders
-    #region
+    # ── Hashing ───────────────────────────────────────────────────────────────
+    def hash_file(self, file_path: str) -> str | None:
+        try:
+            hasher = hashlib.sha256()
+            with open(file_path, "rb") as f:
+                for chunk in iter(lambda: f.read(65536), b""):
+                    hasher.update(chunk)
+            return hasher.hexdigest()
+
+        except (PermissionError, OSError):
+            return None
+
     def hash_folder(self, folder_path: str) -> dict:
         data = {}
 
+        # Collect all file paths first
+        all_files = []
         for dirpath, _, filenames in os.walk(folder_path):
             for filename in filenames:
-                full_path = join(dirpath, filename)
-                
-                hasher = hashlib.sha256()
-                with open(full_path, "rb") as f:
-                    for chunk in iter(lambda: f.read(65536), b""):
-                        hasher.update(chunk)
+                all_files.append(join(dirpath, filename))
 
-                data[full_path] = hasher.hexdigest()
-        
+        # Hash in parallel with a progress bar
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            BarColumn(),
+            TextColumn("{task.completed}/{task.total} files"),
+            TimeElapsedColumn(),
+        ) as progress:
+            task = progress.add_task("Scanning...", total=len(all_files))
+            print()
+
+            with ThreadPoolExecutor() as executor:
+                futures = {executor.submit(self.hash_file, fp): fp for fp in all_files}
+                for future in as_completed(futures):
+                    fp = futures[future]
+                    result = future.result()
+                    if result:
+                        data[fp] = result
+                    progress.advance(task)
+
         return data
 
-    def hash_file(self, file_path: str) -> str:
-        hasher = hashlib.sha256()
-
-        with open(file_path, "rb") as f:
-            for chunk in iter(lambda: f.read(65536), b""):
-                hasher.update(chunk)
-
-        return hasher.hexdigest()
-    #endregion
-
-    # Logic
+    # ── Logic ─────────────────────────────────────────────────────────────────
     def get_time(self) -> str:
         return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -108,16 +120,13 @@ class FileIntegrityMonitor:
         old_paths = set(data1.keys())
         new_paths = set(data2.keys())
 
-        # Files that exist in both but hash changed
         for path in old_paths & new_paths:
             if data1[path] != data2[path]:
                 changes["modified"].append(path)
 
-        # Files that are new
         for path in new_paths - old_paths:
             changes["added"].append(path)
 
-        # Files that were deleted
         for path in old_paths - new_paths:
             changes["deleted"].append(path)
 
@@ -125,9 +134,10 @@ class FileIntegrityMonitor:
         return (has_changes, changes)
 
     def save_log(self, changes: dict, timestamp: str) -> str:
-        log_file = join("logs", f"scan_{timestamp.replace(":", "-").replace(" ", "_")}.txt")
+        safe_timestamp = timestamp.replace(":", "-").replace(" ", "_")
+        log_file = join(self.logs_dir, f"scan_{safe_timestamp}.txt")
 
-        os.makedirs("logs", exist_ok = True)
+        os.makedirs(self.logs_dir, exist_ok=True)
 
         with open(log_file, "w") as f:
             f.write(f"SCAN REPORT - {timestamp}\n")
@@ -139,68 +149,81 @@ class FileIntegrityMonitor:
                 for path in files:
                     f.write(f"  - {path}\n")
                 f.write("\n")
-            
-            f.write("\n\n")
 
-        return log_file
+        return os.path.abspath(log_file)
 
     def display_changes(self, changes: dict, timestamp: str) -> None:
         log_file = self.save_log(changes, timestamp)
-        log_file = os.path.abspath(log_file)
-        
-        rprint(Panel.fit(f"Scan: {timestamp}", title = "File Integrity Monitor", padding = (1, 10)))
+
+        rprint(Panel.fit(f"Scan: {timestamp}", title="File Integrity Monitor", padding=(1, 10)))
         rprint()
 
         if not any(changes.values()):
             rprint("[green]✅  No changes detected[/green]\n")
-            rprint(f"Log file path: {log_file}")
-            rprint()
+            rprint(f"Log file: {log_file}\n")
             return
 
-        rprint("⚠️  Changes detected!")
+        rprint("⚠️  Changes detected!\n")
 
-        # Modified
         if changes["modified"]:
-            rprint(f"    🟡  Modified : {len(changes["modified"])} files")
+            rprint(f"    🟡  Modified : {len(changes['modified'])} files")
 
-        # Added
         if changes["added"]:
-            rprint(f"    🟢  Added : {len(changes["added"])} files")
+            rprint(f"    🟢  Added    : {len(changes['added'])} files")
 
-        # Removed
         if changes["deleted"]:
-            rprint(f"    🔴  Deleted : {len(changes["deleted"])} files")
-        
-        rprint(f"\nLog file path: {log_file}")
-        rprint()
+            rprint(f"    🔴  Deleted  : {len(changes['deleted'])} files")
 
-    # Entry Point
+        rprint(f"\nLog file: {log_file}\n")
+
+    # ── Entry Point ───────────────────────────────────────────────────────────
     def scan(self, file_path: str) -> None:
-        data = {}
         last_scan_data = self.data.get(file_path)
+        timestamp = self.get_time()
 
-        # Load data from new scan
+        # Hash the target
         if os.path.isdir(file_path):
             data = self.hash_folder(file_path)
-        
         else:
-            data = self.hash_file(file_path)
-            _, changed_items = self.compare_data(last_scan_data, data)
-            self.display_changes(changed_items, timestamp)
+            data = {file_path: self.hash_file(file_path)}
 
-        if last_scan_data:
-            _, changed_items = self.compare_data(last_scan_data, data)
+        # First scan — create baseline
+        if not last_scan_data:
             self.data[file_path] = data
+            self.save_data(self.data)
+            rprint(Panel.fit(f"Scan: {timestamp}", title="File Integrity Monitor", padding=(1, 10)))
+            rprint("\n[blue]📁  Baseline created![/blue]")
+            rprint(f"    Tracked [bold]{len(data)}[/bold] files\n")
+            return
 
-        else:
-            self.data[file_path] = data
-
-        # Save data
+        # Compare against baseline
+        _, changed_items = self.compare_data(last_scan_data, data)
+        self.data[file_path] = data
         self.save_data(self.data)
-
-        # Save changes
-        timestamp = self.get_time()
         self.display_changes(changed_items, timestamp)
 
+def main():
+    parser = argparse.ArgumentParser(description="File Integrity Monitor")
+    parser.add_argument("path", help="File or folder to scan")
+    parser.add_argument("--desktop", action="store_true", help="Save log file to Desktop")
+    parser.add_argument("--log-dir", type=str, help="Custom directory to save logs")
+    args = parser.parse_args()
+
+    path = os.path.abspath(os.path.expanduser(args.path))
+
+    if not os.path.exists(path):
+        rprint(f"[red]❌  Path not found: {path}[/red]")
+        return
+
+    fim = FileIntegrityMonitor()
+
+    if args.desktop:
+        fim.logs_dir = os.path.join(os.path.expanduser("~"), "Desktop")
+
+    if args.log_dir:
+        fim.logs_dir = os.path.abspath(args.log_dir)
+
+    fim.scan(path)
+
 if __name__ == "__main__":
-    FileIntegrityMonitor().scan("C:/Users/FamilyPC/Desktop/Test Folder")
+    main()
