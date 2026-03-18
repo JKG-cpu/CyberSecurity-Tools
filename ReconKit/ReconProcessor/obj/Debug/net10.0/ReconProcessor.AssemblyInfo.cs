@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ReconProcessor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f725cba7f101ed444a03376fe58b2941016d9a9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c9b461af3e8662c7777409017cfa8e459d904cd9")]
 [assembly: System.Reflection.AssemblyProductAttribute("ReconProcessor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ReconProcessor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
