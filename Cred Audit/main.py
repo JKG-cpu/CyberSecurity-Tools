@@ -18,6 +18,9 @@ class CredAudit:
             print(f"Config filepath invalid")
             exit(1)
 
+    def hash(self, string: str, type: str) -> str:
+        pass
+
     def run_audit(self, hash_input: str) -> str:
         hash_type = identify_hash(hash_input)
         config = self.load_config()
