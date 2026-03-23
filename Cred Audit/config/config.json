@@ -1,4 +1,4 @@
 {
-    "wordlist_path": "word_lists/common.txt",
+    "wordlist_path": "word_lists/rockyou.txt",
     "hash_type": "sha256"
 }
