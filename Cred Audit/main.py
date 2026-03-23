@@ -1,56 +1,85 @@
 import hashlib
 import argparse
-import json
+from rich import print
 from os.path import join
 
 from src import *
 
 class CredAudit:
     def __init__(self):
+        self.file_loader = FileLoader()
+        self.hash_engine = HashingEngine()
+
         self.config_path = join("config", "config.json")
+        self.config = self.file_loader.load(self.config_path)
 
-    def load_config(self) -> dict:
-        try:
-            with open(self.config_path, "r") as f:
-                return json.load(f)
-
-        except FileNotFoundError:
-            print(f"Config filepath invalid")
-            exit(1)
-
-    def hash(self, string: str, type: str) -> str:
+    # Commands
+    def config_settings(self) -> None:
         pass
 
-    def run_audit(self, hash_input: str) -> str:
-        hash_type = identify_hash(hash_input)
-        config = self.load_config()
+    def crack(self, hash_input: str) -> None:
+        return self.hash_engine.hash_string(hash_input, self.config["hash_type"], False, self.config["wordlist_path"])
 
-        cracked = None
-        if hash_type != "Unknown" and hash_type != "bcrypt":
-            print("Cracking...")
-            cracked = crack_hash(hash_input, hash_type, config["wordlist_path"])
-            print(f"Cracked: {cracked}" if cracked else "Not found in wordlist.")
+    def hash(self, hash_input: str, cracking: bool, details: bool) -> None:
+        output = self.hash_engine.hash_string(hash_input, self.config["hash_type"], cracking, self.config["wordlist_path"])
 
-        result = {
-            "hash": hash_input,
-            "hash_type": hash_type,
-            "cracked": cracked
-        }
+        if cracking:
+            if output["cracked"]:
+                if details:
+                    print(f"[white bold]Hash {output["hash"]}[/]")
+                    print(f"[white bold]Hash Type: {output["hash_type"]}[/]")
+                    print(f"[white bold]Password: {output["cracked"]}[/]")
 
-        return result
+                else:
+                    print(f"[white bold]Password: {output["cracked"]}")
+
+            else:
+                print(f"[white bold]Could not crack {hash_input}. Try a different word list?[/]")
+
+        else:
+            print(f"[white bold]{output}[/]")
+
+    def strength(self, password: str, extra_details: bool) -> None:
+        details = strength_checker(password)
+
+        if extra_details:
+            print(f"[white bold]Password grade: {details["grade"]}[/]")
+            print(f"[white bold]Password length score: {details["length"]}[/]")
+            print(f"[white bold]Password character variety score: {details["char_variety"]}[/]")
+            print(f"[white bold]Password repeated characters score: {details["repeated_chars"]}[/]")
+            print(f"[white bold]{f"{password} is not a common password" if details["common_password"] == 0 else f"{password} is a common password"}[/]")
+
+        else:
+            print(f"[white bold]Password grade: {details["grade"]}\nUse --details for more details[/]")
+
 
 if __name__ == "__main__":
+    c = CredAudit()
+
     parser = argparse.ArgumentParser(prog = "CredAudit")
-    parser.add_argument("--config", action = "store_true", help = "Change settings in the config file.")
-    parser.add_argument("--hash", type = str, help = "Hash to audit")
-    
+    parser.add_argument("--config", action = "store_true", help="Change settings in the config file.")
+    parser.add_argument("--details", action = "store_true", help = "Get more details")
+
+    parser.add_argument("--crack", nargs="?", const=True, default=None, help="Hash to audit (optional: provide a hash string, or use alone with --hash)")
+    parser.add_argument("--hash", type=str, help="Hash a string (Type of hash in config.json)")
+    parser.add_argument("--strength", type = str, help = "Test a password's strength")
+
     args = parser.parse_args()
 
     if args.config:
-        pass
+        c.config_settings()
 
     elif args.hash:
-        result = ""
+        c.hash(args.hash, args.crack, args.details)
+
+    elif args.crack:
+        if isinstance(args.crack, bool):
+            print("Must use a hash string with just --crack")
+            exit(1)
+        print(c.crack(args.crack))
+
+    elif args.strength:
+        c.strength(args.strength, args.details)
 
     else:
         parser.print_help()

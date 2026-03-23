@@ -5,7 +5,8 @@
         "**/.hg": true,
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
-        "**/*.crswap": true
+        "**/*.crswap": true,
+        "Cred Audit/word_lists": true
     },
     "hide-files.files": []
 }
