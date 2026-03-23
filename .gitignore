@@ -1,6 +1,9 @@
 # Word Lists
 Cred Audit/word_lists/rockyou.txt
 
+# Reconprocess obj
+ReconKit/ReconProcessor/obj
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
