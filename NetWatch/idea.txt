@@ -185,10 +185,10 @@ IMPORTANT NOTE
 WEEK 1 — Python backend core
 ------------------------------
   Day 1-2: Project setup
-    [ ] Create folder structure and config.json
-    [ ] Set up requirements.txt with flask, python-whois, rich
-    [ ] Write file_handler.py (load/save JSON)
-    [ ] Set up main.py with argparse skeleton
+    [X] Create folder structure and config.json
+    [X] Set up requirements.txt with flask, python-whois, rich
+    [X] Write file_handler.py (load/save JSON)
+    [X] Set up main.py with argparse skeleton
 
   Day 3-4: ping_sweeper.py
     [ ] Learn how ping works via subprocess

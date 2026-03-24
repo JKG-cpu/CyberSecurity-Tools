@@ -8,5 +8,6 @@
         "**/*.crswap": true,
         "Cred Audit/word_lists": true
     },
-    "hide-files.files": []
+    "hide-files.files": [],
+    "python.REPL.enableREPLSmartSend": false
 }
