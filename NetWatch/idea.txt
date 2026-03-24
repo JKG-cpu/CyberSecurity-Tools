@@ -1,0 +1,288 @@
+================================================================
+  NetWatch — Network Reconnaissance & Monitor
+  Project Idea
+================================================================
+
+OVERVIEW
+--------
+A modular network reconnaissance and monitoring toolkit with
+a lightweight web dashboard. Python handles all the backend
+logic — port scanning, WHOIS lookups, ping sweeping, and
+service detection. Flask serves a minimal HTML/JS frontend
+that displays results in real time. Designed to run entirely
+in GitHub Codespaces with no local setup required.
+
+Follows the same modular pipeline approach as ReconKit and
+CredAudit — each feature lives in its own module, wired
+together by a central orchestrator.
+
+
+LANGUAGE SPLIT
+--------------
+  Python      →  Core scanning logic, Flask backend, CLI
+  HTML/CSS/JS →  Web dashboard (no React — vanilla only)
+  Config JSON →  Settings (target, ports, scan type, output)
+
+
+MODULES
+-------
+  1. ping_sweeper.py
+       - Takes a subnet (e.g. 192.168.1.0/24)
+       - Pings each host to check if it's alive
+       - Returns a list of live hosts
+       - Uses concurrent.futures for speed
+
+  2. port_scanner.py
+       - Takes a host and a port range
+       - Attempts a TCP connection on each port
+       - Returns open ports + common service names
+         (e.g. 80 → HTTP, 443 → HTTPS, 22 → SSH)
+       - Supports fast mode (top 100 ports) and full mode
+
+  3. whois_lookup.py
+       - Takes a domain or IP address
+       - Returns registrar, creation date, expiry date,
+         nameservers, and country
+       - Uses the python-whois library
+
+  4. service_banner.py
+       - Connects to an open port and reads the banner
+       - Identifies the software running on the port
+         (e.g. Apache 2.4, OpenSSH 8.9, nginx 1.18)
+       - Useful for identifying outdated/vulnerable services
+
+  5. app.py (Flask)
+       - Serves the web dashboard on localhost:5000
+       - Exposes API endpoints for each module:
+           GET  /api/ping?subnet=192.168.1.0/24
+           GET  /api/scan?host=192.168.1.1&ports=1-1000
+           GET  /api/whois?target=example.com
+           GET  /api/banner?host=192.168.1.1&port=80
+       - Results streamed back as JSON
+       - Codespaces port forwarding handles the browser access
+
+  6. dashboard/
+       - index.html  → main UI layout
+       - style.css   → clean, minimal styling
+       - app.js      → fetch calls to Flask API, renders results
+       - No frameworks — vanilla HTML/CSS/JS only
+       - Results rendered as clean cards with status colors
+
+  7. main.py
+       - CLI fallback — same argparse pattern as ReconKit
+       - Args: --ping, --scan, --whois, --banner, --web
+       - --web flag launches the Flask server
+
+
+PROJECT STRUCTURE
+-----------------
+  NetWatch/
+  ├── main.py
+  ├── app.py
+  ├── config/
+  │   └── config.json
+  ├── src/
+  │   ├── __init__.py
+  │   ├── ping_sweeper.py
+  │   ├── port_scanner.py
+  │   ├── whois_lookup.py
+  │   ├── service_banner.py
+  │   └── helpers/
+  │       ├── __init__.py
+  │       └── file_handler.py
+  ├── dashboard/
+  │   ├── index.html
+  │   ├── style.css
+  │   └── app.js
+  ├── output/
+  │   └── results.json
+  └── requirements.txt
+
+
+CONFIG FORMAT
+-------------
+  {
+      "default_target": "",
+      "port_range": "1-1000",
+      "fast_mode": true,
+      "timeout": 1,
+      "output_folder": "output"
+  }
+
+
+RESULTS FORMAT
+--------------
+  {
+      "target": "192.168.1.1",
+      "alive": true,
+      "open_ports": [
+          { "port": 80, "service": "HTTP", "banner": "Apache/2.4.41" },
+          { "port": 22, "service": "SSH",  "banner": "OpenSSH_8.9" }
+      ],
+      "whois": {
+          "registrar": "Namecheap",
+          "created": "2015-03-12",
+          "expires": "2026-03-12",
+          "country": "US"
+      }
+  }
+
+
+TOOLS & LIBRARIES
+-----------------
+  Python:
+    socket          →  built-in, TCP connections for port scanning
+    subprocess      →  ping commands
+    concurrent.futures → parallel scanning for speed
+    python-whois    →  WHOIS lookups (pip install python-whois)
+    flask           →  web server + API endpoints
+    rich            →  terminal UI (same as ReconKit/CredAudit)
+    argparse        →  CLI args
+
+  Frontend:
+    Vanilla HTML/CSS/JS  →  no frameworks needed
+    fetch()              →  built-in browser API for HTTP calls
+    CSS Grid/Flexbox     →  layout (no libraries needed)
+
+
+WHAT YOU'LL LEARN
+-----------------
+  - How TCP port scanning works under the hood
+  - What service banners are and why attackers read them
+  - How WHOIS data is structured and what it reveals
+  - How Flask serves a REST API
+  - How to use fetch() to call an API from vanilla JS
+  - How GitHub Codespaces port forwarding works
+  - How to use concurrent.futures for parallel tasks
+
+
+GITHUB CODESPACES NOTES
+-----------------------
+  - Flask should run on 0.0.0.0 not 127.0.0.1 in Codespaces:
+      app.run(host="0.0.0.0", port=5000, debug=True)
+  - Codespaces will auto-detect port 5000 and offer to open it
+  - Port scanning on external hosts may be restricted —
+    use localhost or Codespaces internal network for testing
+  - Add a .devcontainer/devcontainer.json to auto-install
+    dependencies when the Codespace starts:
+      {
+          "postCreateCommand": "pip install -r requirements.txt"
+      }
+
+
+IMPORTANT NOTE
+--------------
+  Only scan networks and hosts you own or have explicit
+  permission to test. Port scanning unauthorized targets
+  is illegal in many jurisdictions. Use Codespaces internal
+  network or localhost during development.
+
+
+================================================================
+  ROADMAP
+================================================================
+
+WEEK 1 — Python backend core
+------------------------------
+  Day 1-2: Project setup
+    [ ] Create folder structure and config.json
+    [ ] Set up requirements.txt with flask, python-whois, rich
+    [ ] Write file_handler.py (load/save JSON)
+    [ ] Set up main.py with argparse skeleton
+
+  Day 3-4: ping_sweeper.py
+    [ ] Learn how ping works via subprocess
+    [ ] Write single host ping check
+    [ ] Expand to subnet sweep (192.168.1.0/24)
+    [ ] Add concurrent.futures for parallel pinging
+    [ ] Test on localhost and Codespaces internal network
+
+  Day 5-7: port_scanner.py
+    [ ] Learn how TCP socket connections work
+    [ ] Write single port checker using socket
+    [ ] Expand to port range scanning
+    [ ] Add common service name mapping (80→HTTP, etc.)
+    [ ] Add fast mode (top 100 ports) vs full mode
+    [ ] Test with concurrent.futures for speed
+
+  Goal: python main.py --ping 127.0.0.1
+        python main.py --scan 127.0.0.1
+
+
+WEEK 2 — WHOIS + banner grabbing
+----------------------------------
+  Day 1-2: whois_lookup.py
+    [ ] pip install python-whois
+    [ ] Write domain WHOIS lookup
+    [ ] Write IP WHOIS lookup
+    [ ] Parse and clean the output into a dict
+    [ ] Handle errors (invalid domain, no WHOIS data)
+
+  Day 3-5: service_banner.py
+    [ ] Learn what a service banner is
+    [ ] Write a socket connection that reads the banner
+    [ ] Test on common ports (80, 22, 21, 25)
+    [ ] Parse the banner string for software/version info
+    [ ] Handle timeouts cleanly
+
+  Day 6-7: Wire modules into main.py
+    [ ] Connect all modules to argparse commands
+    [ ] Write results to output/results.json
+    [ ] Add rich terminal output with color coding
+    [ ] Test full CLI pipeline end to end
+
+  Goal: python main.py --whois example.com
+        python main.py --banner 127.0.0.1 --port 80
+
+
+WEEK 3 — Flask API
+-------------------
+  Day 1-2: Learn Flask basics
+    [ ] pip install flask
+    [ ] Understand routes, request args, jsonify
+    [ ] Write a hello world Flask app
+    [ ] Test port forwarding in Codespaces
+
+  Day 3-5: Build the API endpoints
+    [ ] GET /api/ping?target=127.0.0.1
+    [ ] GET /api/scan?host=127.0.0.1&ports=1-1000
+    [ ] GET /api/whois?target=example.com
+    [ ] GET /api/banner?host=127.0.0.1&port=80
+    [ ] Return all results as JSON
+    [ ] Add basic error handling (400/500 responses)
+
+  Day 6-7: Wire Flask into main.py
+    [ ] Add --web flag to launch Flask server
+    [ ] Make sure CLI and web modes share the same modules
+    [ ] Test all endpoints with browser or curl
+
+  Goal: python main.py --web
+        curl http://localhost:5000/api/whois?target=example.com
+
+
+WEEK 4 — Web dashboard
+------------------------
+  Day 1-2: HTML structure
+    [ ] Write index.html with sections for each tool
+    [ ] Add input fields for target, port range, subnet
+    [ ] Add a results area for each section
+    [ ] Style with CSS Grid/Flexbox — keep it minimal
+
+  Day 3-5: JavaScript + fetch()
+    [ ] Learn how fetch() works (GET requests, .then, async/await)
+    [ ] Wire each form to its Flask API endpoint
+    [ ] Render results as cards in the results area
+    [ ] Add loading states and error messages
+    [ ] Color code results (open ports red, closed grey)
+
+  Day 6-7: Polish + Codespaces config
+    [ ] Add .devcontainer/devcontainer.json
+    [ ] Write a solid README with screenshots
+    [ ] Test the full flow in a fresh Codespace
+    [ ] Commit to GitHub
+
+  Goal: Open Codespace → python main.py --web →
+        browser dashboard fully functional
+
+
+================================================================
