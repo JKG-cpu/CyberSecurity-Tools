@@ -1,0 +1,133 @@
+================================================================
+  Publishing a Python Package to PyPI with uv
+================================================================
+
+OVERVIEW
+--------
+PyPI (Python Package Index) is the official repository for
+Python packages. Publishing here lets anyone install your
+tool with:
+
+  pip install your-package-name
+  uv add your-package-name
+
+
+STEP 1 — SET UP YOUR pyproject.toml
+------------------------------------
+This is the most important file. Here is a complete example:
+
+  [project]
+  name = "cred-audit"               ← must be unique on PyPI
+  version = "0.1.0"
+  description = "A password auditing toolkit"
+  readme = "README.md"
+  requires-python = ">=3.12"
+  license = { text = "MIT" }
+  authors = [
+      { name = "Your Name", email = "you@example.com" }
+  ]
+  dependencies = [
+      "requests",
+      "rich>=14.0.0",
+  ]
+
+  [project.scripts]
+  cred-audit = "main:main"
+                ↑     ↑
+                |     └── function to call inside that file
+                └── the python file (main.py → "main")
+
+  NOTE: The script entry "main:main" means:
+    - Find main.py in the root of the package
+    - Call the main() function inside it
+  If your entry point is inside a folder:
+    "src.main:main" → src/main.py → main()
+  NEVER use spaces in this path. "Cred Audit.main:main" breaks.
+
+  [build-system]
+  requires = ["hatchling"]
+  build-backend = "hatchling.build"
+
+
+STEP 2 — CREATE A PyPI ACCOUNT
+--------------------------------
+  1. Go to https://pypi.org/account/register/
+  2. Verify your email
+  3. Go to Account Settings → API Tokens
+  4. Create a token — save it somewhere safe
+     (you only see it once)
+
+
+STEP 3 — BUILD THE PACKAGE
+----------------------------
+  uv build
+
+  This creates a dist/ folder with two files:
+    dist/
+      cred_audit-0.1.0.tar.gz       ← source distribution
+      cred_audit-0.1.0-py3-none-any.whl  ← wheel (binary)
+
+
+STEP 4 — PUBLISH TO PyPI
+--------------------------
+  uv publish
+
+  When prompted for credentials:
+    Username: __token__
+    Password: pypi-your-token-here
+
+  Or set it as an env variable to avoid typing it every time:
+    export UV_PUBLISH_TOKEN=pypi-your-token-here
+    uv publish
+
+
+STEP 5 — TEST YOUR INSTALL
+----------------------------
+  pip install cred-audit
+  cred-audit --help
+
+  If something is wrong, bump the version in pyproject.toml
+  (PyPI never lets you re-upload the same version):
+    version = "0.1.1"
+  Then build and publish again.
+
+
+STEP 6 — TEST BEFORE PUBLISHING (RECOMMENDED)
+-----------------------------------------------
+  Use TestPyPI first to make sure everything works:
+
+  uv publish --publish-url https://test.pypi.org/legacy/
+
+  Then install from TestPyPI to verify:
+    pip install --index-url https://test.pypi.org/simple/ cred-audit
+
+
+COMMON ERRORS
+-------------
+  "name already exists"
+    → Someone already has that package name on PyPI.
+      Change the name in pyproject.toml and rebuild.
+
+  "invalid classifier"
+    → Check your classifiers match exactly what PyPI expects.
+      See: https://pypi.org/classifiers/
+
+  "file already exists"
+    → You tried to upload the same version twice.
+      Bump the version number and rebuild.
+
+  "invalid entry point"
+    → Your [project.scripts] path has a space or typo.
+      Use dots for folders, colons for the function:
+      "mypackage.main:main" not "my package.main:main"
+
+
+VERSIONING CONVENTION
+----------------------
+  Follow semantic versioning (semver):
+    0.1.0  → initial release
+    0.1.1  → bug fix
+    0.2.0  → new feature
+    1.0.0  → stable, production ready
+
+================================================================
