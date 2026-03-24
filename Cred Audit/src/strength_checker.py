@@ -1,7 +1,7 @@
 from collections import Counter
 from os.path import join
 
-def strength_checker(password: str) -> dict:
+def check_password_security(password: str) -> dict:
     grades = {
         (0, 35): "WEAK",
         (36, 57): "FAIR",

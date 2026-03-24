@@ -6,5 +6,9 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "bcrypt>=5.0.0",
+    "requests",
     "rich>=14.3.3",
 ]
+
+[pyproject.scripts]
+cred-audit = "main:main"
