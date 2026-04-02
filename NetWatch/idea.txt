@@ -191,19 +191,19 @@ WEEK 1 — Python backend core
     [X] Set up main.py with argparse skeleton
 
   Day 3-4: ping_sweeper.py
-    [ ] Learn how ping works via subprocess
-    [ ] Write single host ping check
-    [ ] Expand to subnet sweep (192.168.1.0/24)
-    [ ] Add concurrent.futures for parallel pinging
-    [ ] Test on localhost and Codespaces internal network
+    [X] Learn how ping works via subprocess
+    [x] Write single host ping check
+    [x] Expand to subnet sweep (192.168.1.0/24)
+    [X] Add concurrent.futures for parallel pinging
+    [X] Test on localhost and Codespaces internal network
 
   Day 5-7: port_scanner.py
-    [ ] Learn how TCP socket connections work
-    [ ] Write single port checker using socket
-    [ ] Expand to port range scanning
-    [ ] Add common service name mapping (80→HTTP, etc.)
-    [ ] Add fast mode (top 100 ports) vs full mode
-    [ ] Test with concurrent.futures for speed
+    [X] Learn how TCP socket connections work
+    [X] Write single port checker using socket
+    [X] Expand to port range scanning
+    [X] Add common service name mapping (80→HTTP, etc.)
+    [X] Add fast mode (top 100 ports) vs full mode
+    [X] Test with concurrent.futures for speed
 
   Goal: python main.py --ping 127.0.0.1
         python main.py --scan 127.0.0.1

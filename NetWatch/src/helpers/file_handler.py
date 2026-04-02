@@ -15,7 +15,7 @@ class FileHandler:
     def save(self, file_path: str, data: dict | list) -> None:
         try:
             with open(file_path, "w") as f:
-                json.dump(data, f)
+                json.dump(data, f, indent = 4)
         
         except FileNotFoundError:
             print(f"Filepath {file_path} was not found")

@@ -1,7 +1,5 @@
 {
-    "default_target": "",
-    "port_range": [1, 1000],
-    "fast_mode": true,
     "timeout": 1,
-    "output_folder": "output"
+    "max_workers": 100,
+    "output_path": "output/results.json"
 }

@@ -1,3 +1,3 @@
 {
-    "postCreateCommand": "pip install -r requirements.txt"
+    "postCreateCommand": ["bash", "-c", "sudo apt-get install -y nmap && pip install -r requirements.txt"]
 }

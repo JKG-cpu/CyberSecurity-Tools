@@ -6,8 +6,23 @@
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
         "**/*.crswap": true,
-        "Cred Audit/word_lists": true
+        "Cred Audit/word_lists": true,
+        "ReconKit": true,
+        "Web Vulnerability Scanner": true,
+        "File Integrity Monitor": true,
+        "Cred Audit": true,
+        ".vscode": true,
+        "README.md": true,
+        "LICENSE": true
     },
-    "hide-files.files": [],
+    "hide-files.files": [
+        "ReconKit",
+        "Web Vulnerability Scanner",
+        "File Integrity Monitor",
+        "Cred Audit",
+        ".vscode",
+        "README.md",
+        "LICENSE"
+    ],
     "python.REPL.enableREPLSmartSend": false
 }
