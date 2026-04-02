@@ -228,8 +228,7 @@ WEEK 2 — WHOIS + banner grabbing
   Day 6-7: Wire modules into main.py
     [X] Connect all modules to argparse commands
     [X] Write results to output/results.json
-    [ ] Add rich terminal output with color coding
-    [ ] Test full CLI pipeline end to end
+    [X] Test full CLI pipeline end to end
 
   Goal: python main.py --whois example.com
         python main.py --banner 127.0.0.1 --port 80
