@@ -1,5 +1,4 @@
 import argparse
-import json
 from os.path import join
 from dataclasses import asdict
 
