@@ -1,1 +1,13 @@
-[]
+[
+    {
+        "Service Banners": {
+            "ip": "127.0.0.1",
+            "banners recieved": [
+                [
+                    9999,
+                    "MyService v1.0 ready"
+                ]
+            ]
+        }
+    }
+]

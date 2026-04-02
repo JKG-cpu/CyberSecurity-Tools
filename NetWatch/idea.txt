@@ -212,22 +212,22 @@ WEEK 1 — Python backend core
 WEEK 2 — WHOIS + banner grabbing
 ----------------------------------
   Day 1-2: whois_lookup.py
-    [ ] pip install python-whois
-    [ ] Write domain WHOIS lookup
-    [ ] Write IP WHOIS lookup
-    [ ] Parse and clean the output into a dict
-    [ ] Handle errors (invalid domain, no WHOIS data)
+    [X] pip install python-whois
+    [X] Write domain WHOIS lookup
+    [X] Write IP WHOIS lookup
+    [X] Parse and clean the output into a dict
+    [X] Handle errors (invalid domain, no WHOIS data)
 
   Day 3-5: service_banner.py
-    [ ] Learn what a service banner is
-    [ ] Write a socket connection that reads the banner
-    [ ] Test on common ports (80, 22, 21, 25)
-    [ ] Parse the banner string for software/version info
-    [ ] Handle timeouts cleanly
+    [X] Learn what a service banner is
+    [X] Write a socket connection that reads the banner
+    [X] Test on common ports (80, 22, 21, 25)
+    [X] Parse the banner string for software/version info
+    [x] Handle timeouts cleanly
 
   Day 6-7: Wire modules into main.py
-    [ ] Connect all modules to argparse commands
-    [ ] Write results to output/results.json
+    [X] Connect all modules to argparse commands
+    [X] Write results to output/results.json
     [ ] Add rich terminal output with color coding
     [ ] Test full CLI pipeline end to end
 
