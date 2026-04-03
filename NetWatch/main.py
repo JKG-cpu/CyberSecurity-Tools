@@ -146,7 +146,7 @@ if __name__ == "__main__":
     whois.add_argument("-whois", type = str, help = "Get whois info from a domain or ip")
 
     banner = parser.add_argument_group("Banner")
-    banner.add_argument("-get-banner", type = str, help = "Get banners from a specific ip address")
+    banner.add_argument("-banner", type = str, help = "Get banners from a specific ip address")
 
     args = parser.parse_args()
     
@@ -169,9 +169,9 @@ if __name__ == "__main__":
             domain = args.whois
         )
 
-    elif args.get_banner:
+    elif args.banner:
         m.grab_banners(
-            ip = args.get_banner,
+            ip = args.banner,
             full_mode = args.full,
             ports = [
                 int(port) for port in args.ports.split(",")

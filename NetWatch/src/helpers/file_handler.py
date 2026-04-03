@@ -1,4 +1,8 @@
 import json
+from os.path import join
+
+def get_config() -> dict:
+    return FileHandler().load_data(join("config", "config.json"))
 
 class FileHandler:
     def load_data(self, file_path: str) -> dict | list:
@@ -22,4 +26,3 @@ class FileHandler:
         
         except Exception as e:
             print(f"Error saving data: {e}")
-

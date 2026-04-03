@@ -237,16 +237,16 @@ WEEK 2 — WHOIS + banner grabbing
 WEEK 3 — Flask API
 -------------------
   Day 1-2: Learn Flask basics
-    [ ] pip install flask
-    [ ] Understand routes, request args, jsonify
-    [ ] Write a hello world Flask app
-    [ ] Test port forwarding in Codespaces
+    [X] pip install flask
+    [X] Understand routes, request args, jsonify
+    [X] Write a hello world Flask app
+    [X] Test port forwarding in Codespaces
 
   Day 3-5: Build the API endpoints
-    [ ] GET /api/ping?target=127.0.0.1
-    [ ] GET /api/scan?host=127.0.0.1&ports=1-1000
-    [ ] GET /api/whois?target=example.com
-    [ ] GET /api/banner?host=127.0.0.1&port=80
+    [X] GET /api/ping?target=127.0.0.1
+    [X] GET /api/scan?host=127.0.0.1&ports=1-1000
+    [X] GET /api/whois?target=example.com
+    [X] GET /api/banner?host=127.0.0.1&ports=80
     [ ] Return all results as JSON
     [ ] Add basic error handling (400/500 responses)
 

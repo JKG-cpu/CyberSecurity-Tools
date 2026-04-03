@@ -25,14 +25,12 @@ def ping_sweep(ip_addr: str, max_workers: int = 100) -> list[str]:
     hosts = ipaddress.ip_network(ip_addr, strict = False)
     results = []
 
-    # print(f"[*] Scanning {hosts.num_addresses} hosts on {hosts.network_address}...")
     with ThreadPoolExecutor(max_workers = max_workers) as executor:
         futures = {executor.submit(start_ping, str(host)): str(host) for host in hosts.hosts()}
 
         for future in as_completed(futures):
             try:
                 if future.result():
-                    # print(f"[+] {futures[future]} is up")
                     results.append(futures[future])
             
             except Exception as e:
