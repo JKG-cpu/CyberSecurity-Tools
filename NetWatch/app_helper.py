@@ -1,4 +1,4 @@
-from .src import ping_sweep, start_ping, PortScanner, WhoisLookup, DNSLookup, ServiceBanner, get_config
+from src import ping_sweep, start_ping, PortScanner, WhoisLookup, DNSLookup, ServiceBanner, get_config
 
 config = get_config()
 ps = PortScanner()

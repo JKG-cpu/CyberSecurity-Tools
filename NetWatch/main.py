@@ -3,6 +3,7 @@ from os.path import join
 from dataclasses import asdict
 
 from src import *
+from app import app
 
 class Main:
     def __init__(self) -> None:
@@ -126,6 +127,9 @@ class Main:
         else:
             print("No service banners given")
 
+    def web(self) -> None:
+        app.run(debug = False, port = 5000)
+
 if __name__ == "__main__":
     m = Main()
 
@@ -148,9 +152,15 @@ if __name__ == "__main__":
     banner = parser.add_argument_group("Banner")
     banner.add_argument("-banner", type = str, help = "Get banners from a specific ip address")
 
+    web = parser.add_argument_group("Website")
+    web.add_argument("-web", action = "store_true", help = "Launch the web browser version of this!")
+
     args = parser.parse_args()
     
-    if args.scan:
+    if args.web:
+        m.web()
+
+    elif args.scan:
         m.scan(
             ip = args.scan,
             full_mode = args.full,

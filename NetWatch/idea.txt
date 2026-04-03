@@ -247,13 +247,13 @@ WEEK 3 — Flask API
     [X] GET /api/scan?host=127.0.0.1&ports=1-1000
     [X] GET /api/whois?target=example.com
     [X] GET /api/banner?host=127.0.0.1&ports=80
-    [ ] Return all results as JSON
-    [ ] Add basic error handling (400/500 responses)
+    [X] Return all results as JSON
+    [X] Add basic error handling (400/500 responses)
 
   Day 6-7: Wire Flask into main.py
-    [ ] Add --web flag to launch Flask server
-    [ ] Make sure CLI and web modes share the same modules
-    [ ] Test all endpoints with browser or curl
+    [X] Add --web flag to launch Flask server
+    [X] Make sure CLI and web modes share the same modules
+    [X] Test all endpoints with browser or curl
 
   Goal: python main.py --web
         curl http://localhost:5000/api/whois?target=example.com

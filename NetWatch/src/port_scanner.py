@@ -77,11 +77,11 @@ class PortScanner:
         selective_ports: list[int] | None = None,
     ) -> list[PortResult]:
 
-        if full_mode:
-            return self.scan_range(host, (1, 65535), timeout)
-
-        elif selective_ports:
+        if selective_ports:
             return self.scan_selective(host, selective_ports, timeout, max_workers)
+
+        elif full_mode:
+            return self.scan_range(host, (1, 65535), timeout)
 
         else:
             return self.scan_range(host, (1, 1024), timeout)
