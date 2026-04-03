@@ -9,7 +9,7 @@ def home():
 
 @app.route("/sweep")
 def sweep():
-    pass
+    pass 
 
 @app.route("/ping")
 def ping():
