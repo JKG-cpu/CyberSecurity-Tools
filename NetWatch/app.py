@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from app_helper import sweep_host, ping_host, scan_host, whois_info, banner_info
 from dataclasses import asdict
 
-app = Flask(__name__, template_folder = "dashboard")
+app = Flask(__name__, template_folder = "dashboard", static_folder = "dashboard/static")
 
 @app.route("/")
 def home():

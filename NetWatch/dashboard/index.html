@@ -3,12 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>NetWatch</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+    <!-- Ping -->
+    <div class="ping">
+        <input type="text" placeholder="192.168.1.1" id="ping-target">
+        <button id="ping-btn">Ping</button>
+        <div id="ping-result"></div>
+    </div>
 
-    <h1>Hello World</h1>
-    <p>This is my first app with Flask API</p>
+    <!-- Sweep -->
+    <div class="sweep">
+        <input type="text" placeholder="192.168.1.1" id="ping-sweep">
+        <button id="sweep-btn">Sweep</button>
+        <div id="sweep-result"></div>
+    </div>
+    
+    <!-- Scan -->
+    <div class="scn">
 
+    </div>
+    
+    <!-- Whois -->
+    <div class="whois">
+
+    </div>
+
+    <!-- Banner -->
+    <div class="banner">
+
+    </div>
+
+    <!-- Script -->
+    <script src="/static/app.js"></script>
 </body>
 </html>
