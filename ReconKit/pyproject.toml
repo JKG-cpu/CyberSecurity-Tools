@@ -1,7 +1,7 @@
 [project]
 name = "reconkit"
 version = "0.1.0"
-description = "Add your description here"
+description = "A command line tool that scans hosts you specifiy + formates and saves them to an output file"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -11,4 +11,4 @@ dependencies = [
 ]
 
 [project.scripts]
-reconkit = "reconkit.main:main"
+reconKit = "reconkit.main:main"
