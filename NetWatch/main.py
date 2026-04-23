@@ -3,7 +3,6 @@ from os.path import join
 from dataclasses import asdict
 
 from src import *
-from app import app
 
 class Main:
     def __init__(self) -> None:
@@ -127,9 +126,6 @@ class Main:
         else:
             print("No service banners given")
 
-    def web(self) -> None:
-        app.run(debug = False, port = 5000)
-
 if __name__ == "__main__":
     m = Main()
 
@@ -157,10 +153,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     
-    if args.web:
-        m.web()
-
-    elif args.scan:
+    if args.scan:
         m.scan(
             ip = args.scan,
             full_mode = args.full,
