@@ -1,7 +1,7 @@
 [project]
-name = "netwatch"
+name = "netwatchscn"
 version = "0.1.0"
-description = "Add your description here"
+description = "A command line tool that you can use to ping hosts, scan targets, sweep targets, and get banners + whois / dns data"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

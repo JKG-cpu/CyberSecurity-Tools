@@ -1,5 +1,5 @@
 [project]
-name = "cred-audit"
+name = "credAudit"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -11,4 +11,4 @@ dependencies = [
 ]
 
 [pyproject.scripts]
-cred-audit = "main:main"
+credAudit = "main:main"
