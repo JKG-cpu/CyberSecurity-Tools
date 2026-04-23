@@ -2,7 +2,7 @@
 Cred Audit/word_lists/rockyou.txt
 
 # Reconprocess obj
-ReconKit/ReconProcessor/obj/Debug/net10.0
+ReconKit/ReconProcessor/obj
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

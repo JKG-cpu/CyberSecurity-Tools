@@ -13,3 +13,6 @@ dependencies = [
     "python-whois>=0.9.6",
     "rich>=14.3.3",
 ]
+
+[project.scripts]
+netwatchscn = "reconkit.main:main"

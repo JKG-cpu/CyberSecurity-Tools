@@ -8,32 +8,19 @@
         "**/*.crswap": true,
         "Cred Audit/word_lists": true,
         "NetWatch/.python-version": true,
-        "Web Vulnerability Scanner": true,
+        "Pretty Terminal Practice": true,
         "LICENSE": true,
         "publishing.txt": true,
-        "Pretty Terminal Practice": true,
-        "ReconKit": true,
-        "File Integrity Monitor": true,
-        "Cred Audit": true,
         ".vscode": true,
-        "README.md": true,
         "NetWatch/uv.lock": true,
-        "NetWatch/requirements.txt": true,
-        "NetWatch/pyproject.toml": true
+        "NetWatch/requirements.txt": true
     },
     "hide-files.files": [
-        "Web Vulnerability Scanner",
         "LICENSE",
         "publishing.txt",
-        "Pretty Terminal Practice",
-        "ReconKit",
-        "File Integrity Monitor",
-        "Cred Audit",
         ".vscode",
-        "README.md",
         "NetWatch/uv.lock",
-        "NetWatch/requirements.txt",
-        "NetWatch/pyproject.toml"
+        "NetWatch/requirements.txt"
     ],
     "python.REPL.enableREPLSmartSend": false
 }
