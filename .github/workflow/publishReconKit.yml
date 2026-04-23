@@ -15,7 +15,7 @@ jobs:
         uses: astral-sh/setup-uv@v5
 
       - name: Build & Publish
-        working-directory: ./ReconKit
+        working-directory: ReconKit
         run: |
           uv build
           uv publish

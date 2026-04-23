@@ -15,7 +15,7 @@ jobs:
         uses: astral-sh/setup-uv@v5
 
       - name: Build & Publish
-        working-directory: "./Cred Audit"
+        working-directory: "Cred Audit"
         run: |
           uv build
           uv publish
